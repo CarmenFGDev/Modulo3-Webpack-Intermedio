@@ -4,12 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "run-p -l type-check:watch start:dev",
+    "test": "echo \"Error: no test specified\" && exit 1",
     "type-check": "tsc --noEmit",
     "type-check:watch": "npm run type-check -- --watch",
-    "start:dev": "webpack serve --mode development",
-    "build": "webpack --mode development"
+    "start:dev": "webpack serve --config webpack.dev.js",
+    "start:prod": "webpack serve --config webpack.prod.js",
+    "build:dev": "webpack --config webpack.dev.js",
+    "build:prod": "webpack --config webpack.prod.js",
+    "build:perf": "npm run type-check && webpack --config webpack.perf.js"
   },
   "repository": {
     "type": "git",
@@ -31,6 +34,7 @@
     "babel-loader": "^9.1.2",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.3",
+    "dotenv-webpack": "^8.0.1",
     "html-loader": "^4.2.0",
     "html-webpack-plugin": "^5.5.1",
     "image-minimizer-webpack-plugin": "^3.8.2",
@@ -45,8 +49,10 @@
     "style-loader": "^3.3.2",
     "typescript": "^5.0.4",
     "webpack": "^5.80.0",
+    "webpack-bundle-analyzer": "^4.8.0",
     "webpack-cli": "^5.0.2",
-    "webpack-dev-server": "^4.13.3"
+    "webpack-dev-server": "^4.13.3",
+    "webpack-merge": "^5.8.0"
   },
   "dependencies": {
     "bootstrap": "^5.2.3",

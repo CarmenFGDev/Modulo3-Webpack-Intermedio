@@ -11,6 +11,7 @@ export const RegardComponent: React.FC = () => {
         <img src={jpgImage}></img>
       </div>
       <p>Hola {getTeacherName()}</p>
+      <p>Entorno {process.env.MESSAGE} </p>
     </div>
   );
 };
