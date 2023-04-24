@@ -4,10 +4,10 @@ const path = require("path");
 module.exports = {
   context: path.resolve(__dirname, "./src"),
   resolve: {
-    extensions: [".js", ".ts"],
+    extensions: [".js", ".ts", ".tsx"],
   },
   entry: {
-    app: "./index.ts",
+    app: "./index.tsx",
   },
   output: {
     filename: "[name].[chunkhash].js",
@@ -17,14 +17,23 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.ts$/,
+        test: /\.tsx?$/,
         exclude: /node_modules/,
         loader: "babel-loader",
       },
       {
         test: /\.scss$/,
         exclude: /node_modules/,
-        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
+        use: [
+          MiniCssExtractPlugin.loader,
+          {
+            loader: "css-loader",
+            options: {
+              modules: true,
+            },
+          },
+          "sass-loader",
+        ],
       },
       {
         test: /\.css$/,
@@ -41,7 +50,7 @@ module.exports = {
       },
     ],
   },
-  devtool: 'eval-source-map',
+  devtool: "eval-source-map",
   devServer: {
     port: 8080,
     open: true,
